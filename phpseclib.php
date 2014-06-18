@@ -21,7 +21,7 @@ if (!function_exists('ssh2_connect')) {
     // phpseclib doesn't let you do SSH2 initially and then "upgrade" to SFTP. if you want to do SFTP
     // you have specify SFTP from the onset. that said, just because phpseclib will initialize a
     // connection with SFTP doesn't mean you can't execute commands on it and do non-SFTP stuff on it
-    function ssh2_connect($host, $port = 22, $methods = array(), $callbacks = array()
+    function ssh2_connect($host, $port = 22, $methods = array(), $callbacks = array())
     {
         $session = new Net_SFTP($host, $port);
         $session->enableQuietMode();
