@@ -71,11 +71,14 @@ if (!function_exists('ssh2_connect')) {
 
     // phpseclib only supports one type of pty: vt100
     // environmental variables cannot be set through phpseclib
-    // phpseclib has fixed dimensions of 80x24 (chars)
+    // the only $width_height_type option supported is SSH2_TERM_UNIT_CHARS
     function ssh2_exec($session, $command, $pty = NULL, $env = NULL, $width = 80, $height = 25, $width_height_type = SSH2_TERM_UNIT_CHARS)
     {
         if (isset($pty)) {
             $session->enablePTY();
+        }
+        if ($width_height_type == SSH2_TERM_UNIT_CHARS) {
+            $session->setWindowSize($width, $height);
         }
         $res = fopen('php://memory', 'w+');
         fputs($res, $session->exec($command));
@@ -83,6 +86,7 @@ if (!function_exists('ssh2_connect')) {
         if (isset($pty)) {
             $session->disablePTY();
         }
+        $session->setWindowSize(80, 24);
         return $res;
     }
 
