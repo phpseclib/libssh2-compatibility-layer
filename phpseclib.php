@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * libssh2-compatibility-layer
+ *
+ * @license http://www.opensource.org/licenses/mit-license.html MIT License
+ */
+
 include 'Net/SFTP.php';
 include 'Net/SFTP/Stream.php';
 include 'Net/SCP.php';
